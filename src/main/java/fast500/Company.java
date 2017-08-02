@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 /**
  * Created by liuyufei on 1/08/17.
@@ -22,6 +23,10 @@ public class Company implements Comparable<Company> {
 
     private final String USER_AGENT = "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6";
     private final String REF_SITE = "http://www.google.co.nz";
+    private static final String EMAIL_FORMAT =
+            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    private final static Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_FORMAT);
 
 
     public Company(String rank, String name, String website, String country, String year, String growth, String field) {
@@ -89,11 +94,13 @@ public class Company implements Comparable<Company> {
         return contactLinkOpt
                 .flatMap(contactLink -> getDocumentFromURL(contactLink)) //extract contact link
                 .flatMap(doc-> doc.select("a").parallelStream() //extract contact document
-                            .filter(a->(a.text().contains("career")||a.text().contains("info"))&&a.text().contains("@")) //look for info@xxx or career@xxx
+                            .filter(a->EMAIL_PATTERN.matcher(a.text()).matches()) //look for email address
+                            .filter(a->!a.text().contains("sale")&&!a.text().contains("support")&&!a.text().contains("account")) //don't want send my cv to sale or support team😅
                             .map(Element::text).findFirst() //may null
                 );
 
     }
+
 
     @Override
     public boolean equals(Object o) {
