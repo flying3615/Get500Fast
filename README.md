@@ -1,10 +1,10 @@
 # Get500Fast
-Simple code to let me get the Email address from [Deloitte annual ranking of the 500 fastest growing technology companies in Asia Pacic](https://goo.gl/3ddNGf) in 2014/2015/2016.
-Doing so to assist me send my CV efficiently. 
+Simple code to let me get the email addresses from [Deloitte annual ranking of the 500 fastest growing technology companies in Asia Pacic](https://goo.gl/3ddNGf) in 2014/2015/2016.
+Doing so to assist me sending my CV efficiently. 
 
-Powered by PDFBox, which extract text from PDF report and Jsoup, which analysis company's website and get Contact info.
+Powered by PDFBox, which extracts text from PDF report and Jsoup, which analyses company's website and get Contact info.
 
-Although there are 60 different NZ companies won 2014,2015&2016 awards, the result comes out is not so fruitful due to connection issue or their contact page doesnt include email
+Although there are 60 different NZ companies won 2014,2015&2016 awards, the result comes out is not so fruitful due to connection issue or their contact page doesnt include email format😥.
 
 Next step is just to send my CV to those email automatically, hope don't consider it to be a spam 🙏 
 >Total companies 60  
